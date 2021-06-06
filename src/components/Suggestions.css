@@ -1,0 +1,34 @@
+.suggestions {
+  width: 100%;
+  height: 35vh;
+  margin-top: 80px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.suggestions__blocks {
+  width: 95%;
+  height: 40vh;
+  background-color: lightgray;
+  overflow-x: scroll;
+
+
+
+}
+
+.suggestions__blocks__p{
+font-size: 25px;
+margin-left: 15px;
+margin-top:5px;
+}
+
+
+
+.suggestions__blocks::-webkit-scrollbar {
+    display: none;
+}
+
+.suggestions__block{
+  display: flex;
+}

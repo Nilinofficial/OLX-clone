@@ -1,0 +1,185 @@
+
+
+.header {
+    width: 100%;
+    height: 7vh;
+    background-color: whitesmoke;
+    position: fixed;
+    z-index: 10;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+}
+
+.header__components {
+width: 80%;
+background-color: whitesmoke;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+.logo {
+    width: 100px;
+}
+
+.first__input{
+    width: 18%;
+    height: 5vh;
+    border: none;
+    outline: 2px solid black;
+    display: flex;
+    align-items: center;
+    background-color: white;
+}
+.first__input__search{
+    flex:0.15;
+    
+}
+.first__input:focus-within{
+    outline: none;
+    border:2px solid #23e5db;
+}
+
+.location {
+    flex: 0.85;
+    height: 100%;
+    outline: none;
+    border: none;
+    
+}
+.second {
+    display: flex;
+    width: 40%;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    height: 5vh;
+    outline: 2px solid black;
+    
+}
+
+.second:hover {
+    display: flex;
+    width: 40%;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    height: 5vh;
+    outline: 2px solid;
+    
+}
+.second:focus-within {
+    display: flex;
+    width: 40%;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    height: 5vh;
+    outline:  2px solid #23e5db;
+    
+    
+}
+
+
+
+.second__input__search {
+    width: 92%;
+    height: 5vh;
+}
+
+
+
+
+
+
+
+
+.second__searchbutton{
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    outline: none;
+    border: none;
+}
+/*
+.second__input__search__icon{
+height: 5vh;
+background-color: black;
+display: flex;
+align-items: center;
+width: 8%;
+}
+*/
+
+
+.second__input__search:focus {
+    width: 100%;
+    height: 5vh;
+    border: none;
+    outline: none !important;
+    
+}
+
+
+
+
+
+
+.sell{
+    width: 50px;
+}
+
+
+.header__signin{
+height: 500px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+}
+
+.header__login__image{
+width: 220px;
+}
+
+.header__login__button{
+    width: 70%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #002f34;
+    outline: none;
+    border: 3px solid black;
+    color: white;
+    border-radius: 5px;
+}
+
+.header__signup{
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    }
+    
+    .header__signup__image{
+    width: 220px;
+    }
+    
+    .header__signup__button{
+        width: 70%;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #002f34;
+        outline: none;
+        border: 3px solid black;
+        color: white;
+        border-radius: 5px;
+    }
+ 

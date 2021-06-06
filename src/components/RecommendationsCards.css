@@ -1,0 +1,23 @@
+
+
+.recommendations__cards {
+  
+    width: 300px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin: 10px;
+    background-color: white;
+}
+
+
+.recommendations__cards__image{
+    width: 200px;
+}
+
+.recommendations__cards__p{
+    font-size: 15px;
+}
