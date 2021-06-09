@@ -1,16 +1,22 @@
 import './Suggestions.css'
-import React ,{useContext} from 'react'
+import React  from 'react'
 import SuggestionsCards from './SuggestionsCards'
-import Header from './Header'
 
-function Suggestions() {
 
-    
 
+function Suggestions(props) {
+
+  console.log(props.user)
+
+
+   
     return (
-               
-      
-         <div className="suggestions">
+               <>
+             
+             
+          
+             
+            {props.user ? (<div className="suggestions">
              <div className="suggestions__blocks">
                 
            
@@ -22,9 +28,10 @@ function Suggestions() {
                    </div>
                  
              </div>
-        </div>
+        </div>  ) : (<> </> )}
 
        
+       </>
 
      
 

@@ -10,15 +10,17 @@ import{useState} from 'react'
 function App() {
 
 
+  const [userid,setUserid] = useState(null)
+ 
 
 
 
   return (
     <div className="app">
-      <Header   />
-      
+      <Header  setUserid = {setUserid} />
+     
      <Banner/>
-     <Suggestions   />
+     <Suggestions  user={userid} />
      <Recommendations/>
      <Footer/>
      
