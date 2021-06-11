@@ -1,7 +1,6 @@
 
-.suggestions__cards {
-  
-    width: 300px;
+.suggestions__card {
+  width: 300px;
     height: 220px;
     display: flex;
     flex-direction: column;
@@ -12,11 +11,56 @@
     background-color: white;
 }
 
+.suggestions__cards
+{
+    display: flex;
+}
+
 
 .suggestions__cards__image{
     width: 200px;
+    height: 100px;
 }
-
 .suggestions__cards__p{
     font-size: 15px;
 }
+
+.date {
+    font-size: 9px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+@media only screen and (max-width: 1100px) {
+
+    
+  
+    .suggestions__card {
+  
+        width: 180px;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        margin: 10px;
+        background-color: white;
+    }
+
+    .suggestions__cards
+{
+    display: flex;
+}
+    
+    .suggestions__cards__image{
+        width: 150px;
+        height: 100px;
+    }
+    
+    .suggestions__cards__p{
+        font-size: 12px;
+    }
+    
+  
+  }

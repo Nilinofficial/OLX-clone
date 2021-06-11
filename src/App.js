@@ -5,24 +5,41 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Recommendations from './components/Recommendations';
 import Suggestions from './components/Suggestions';
-import{useState} from 'react'
+import { BrowserRouter as Router, Route, Link,Switch } from "react-router-dom";
+import React from 'react'
+import Cars from './pages/Cars';
 
 function App() {
 
-
-  const [userid,setUserid] = useState(null)
- 
-
-
-
   return (
     <div className="app">
-      <Header  setUserid = {setUserid} />
-     
-     <Banner/>
-     <Suggestions  user={userid} />
+
+<Router>
+      <Header  />    
+      <Banner/>
+      
+   <Switch>
+   <Route exact path= "/">
+  
+     <Suggestions  />
      <Recommendations/>
-     <Footer/>
+      <Footer/>
+      </Route>
+
+        
+     <Route path="/cars">
+       <Cars/>
+     </Route> 
+     
+
+     
+
+      </Switch>
+   
+     </Router>
+
+  
+
      
     </div>
   );

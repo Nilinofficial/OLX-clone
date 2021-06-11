@@ -1,16 +1,22 @@
 
 
+
+
 .header {
     width: 100%;
     height: 7vh;
     background-color: whitesmoke;
     position: fixed;
     z-index: 10;
-    border-bottom: 1px solid lightgray;
     display: flex;
     align-items: center;
     justify-content: center;
     
+    
+}
+
+.hamburger {
+    display: none;
 }
 
 .header__components {
@@ -57,10 +63,10 @@ justify-content: space-between;
     display: flex;
     width: 40%;
     align-items: center;
-    background-color: white;
+    background-color: black;
     display: flex;
     height: 5vh;
-    outline: 2px solid black;
+    
     
 }
 
@@ -169,6 +175,7 @@ width: 220px;
     border: 3px solid black;
     color: white;
     border-radius: 5px;
+    margin:10px;
 }
 
 .header__signup{
@@ -201,24 +208,102 @@ width: 220px;
         align-items: center;
     }
 
-    @media only screen and (max-width: 1400px) {
-        
-.first__input{
-    display: none;
+
+    .header__location{
+        display: none;
+    }
+    
+
+.header__sell{
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__sell input{
+   margin-top: 2.5px;
+   width: 60%;
+  }
+
+  .header__sell p{
+    margin-top: 2.5px;
+    display: flex;
+    justify-content: flex-start;
+   }
+
+.header__sell__image{
+width: 100px;
+height: 100px;
+}
+
+.header__sell__content {
+height: 300px;
+width: 300px;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.header__sell__content Button {
+    background-color: #002f34;
+    margin: 25px;
+    color: whitesmoke;
+}
+
+.header__sell__content Button:hover {
+    background-color: #011f22;
+    margin: 25px;
 }
 
 
-.icons {
-    display: none;
+.sell__signIn{
+    margin-top: 10px;
+    background-color: #011f22;
+    height: 30px;
+    width: 100px;
+    color: white;
+    border-radius: 10px;
 }
 
 
-      }
+
+   
 
 
-      @media only screen and (max-width: 1100px) {
+
+
+
+
+      @media only screen and (max-width: 1200px) {
         
           
+
+        .header {
+            width: 100%;
+            height: 7vh;
+            background-color: whitesmoke;
+            position: fixed;
+            z-index: 10;
+            border-bottom: 1px solid lightgray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            
+        }
+
+        .header__components {
+            width: 100%;
+            background-color: whitesmoke;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            
+            }
+
+
+
        .language{
            display: none;
        }
@@ -226,6 +311,99 @@ width: 220px;
 
 
       .sell{
-          display: none;
+          bottom:0;
+          position: fixed;
+
       }        
+
+     
+
+      .hamburger {
+        display: flex;
+        padding: 20px;
+        justify-content: start;
+    }
+
+    .app__loginContainer{
+        display: none;
+    }
+
+
+.header__location{
+    display: flex;
+    padding: 5px;
+}
+
+.second {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    height: 5vh;
+    outline: 2px solid black;
+   
+    
+}
+
+
+
+
+
+.second:hover {
+    display: flex;
+    width: 70%;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    height: 5vh;
+    outline: 2px solid black;
+    
+}
+.second:focus-within {
+
+    display: flex;
+    width: 70%;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    height: 5vh;
+    outline: 2px solid black;
+    
+}
+
+.second input {
+    flex:0.94;
+}
+
+.second__searchbutton{
+    flex: 0.06;
+    justify-content: center;
+    display: flex;
+}
+
+
+.login_name {
+    display: none;
+}
+
+.header__mobile__login{
+    height: 200px;
+    width: 200px;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.first__input{
+    display: none;
+}
+
+
+.icons{
+    display: none;
+}
+
               }

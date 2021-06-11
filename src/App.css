@@ -2,8 +2,19 @@
 
 .app {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: auto;
+   
     
+}
+
+
+@media only screen and (max-width: 1200px){
+    .app{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 2vh;
+       
+    }
+
 }

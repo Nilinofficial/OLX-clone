@@ -1,19 +1,53 @@
 
 
 import './SuggestionsCards.css'
+import {auth,storage,db,firebase} from '../firebase/firebase'
+import React,{useEffect,useState} from 'react'
 
-import React from 'react'
+function Cards() {
 
-function Cards({imageurl,price,title}) {
+const [products,setProducts] = useState([])
+
+useEffect(() => {
+    firebase.firestore().collection('products').orderBy('timestamp','desc').get().then((snapshot)=> {
+        const allPost = snapshot.docs.map((product) => {
+            return {
+                ...product.data(),
+                id:product.id
+            }
+        })
+  setProducts(allPost)
+  
+    })
+  }, [])
+
     return (
-        
-     <div className="suggestions__cards">
+       <div className="suggestions__cards">
 
-<img className="suggestions__cards__image" src={imageurl} alt="" />
-    <h4> ₹ {price}</h4>
-     <p className="suggestions__cards__p">{title}</p>
+{products.map((product)=> {
+
+   return  <div className="suggestions__card">
+
+    
+
+<img className="suggestions__cards__image" src={product.url} alt="" />
+    <h4> ₹ {product.Price}</h4>
+     <p className="suggestions__cards__p">{product.Name}</p>
+     <div className="date">
+     <p className="date">Date : {product.CreatedAt}</p>
+     </div>
+     
 </div>
         
+})}
+
+
+       </div>
+
+ 
+
+        
+  
       
     )
 }

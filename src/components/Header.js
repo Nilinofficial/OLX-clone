@@ -1,7 +1,7 @@
 import './Header.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import {auth} from '../firebase/firebase'
+import {auth,storage,db,firebase} from '../firebase/firebase'
 import {useState,useEffect} from 'react'
 import {Button,Input} from '@material-ui/core'
 import React from 'react'
@@ -9,8 +9,10 @@ import SearchIcon from '@material-ui/icons/Search';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import MenuIcon from '@material-ui/icons/Menu';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
-
+import { BrowserRouter as Router, Route, Link,Switch } from "react-router-dom";
 function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -41,19 +43,50 @@ function Header({setUserid}) {
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
     const [user,setUser] = useState(null)
-  const[openSignIn,setOpenSignIn] = useState(false)
-  const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open,setOpen] = useState(false)
- 
+    const[openSignIn,setOpenSignIn] = useState(false)
+    const classes = useStyles();
+    const [modalStyle] = React.useState(getModalStyle);
+    const [open,setOpen] = useState(false)
+    const [openSell,setOpenSell] = useState(false)
+    const [productName,setProductName] = useState("")
+    const [productCategory,setProductCategory] = useState("");
+    const [productPrice,setProductPrice]= useState();
+    const [image,setimage] = useState(null);
+    const[uploadingStatus,setUploadingStatus] = useState("")
 
-   
+    const date= new Date()
+
+    const addItem = (e) => { 
+      alert("Uploading...We will notify you when the upload completes.")
+     firebase.storage().ref(`/images/${image.name}`).put(image).then(({ref})=> {ref.getDownloadURL().then((url)=> {
+       console.log(url)
+      
+       firebase.firestore().collection('products').add({
+        Name : productName,
+        category : productCategory,
+        Price: productPrice,
+        url:url,
+        userId: user.uid,
+        CreatedAt: date.toDateString(),
+        timestamp:firebase.firestore.FieldValue.serverTimestamp()
+       }).then(setOpenSell(false)).then(alert("Item added"))
+      })
+     })
+    
+    
+     
+    
+
+    }
+    
+
+
 
   useEffect(() => {
     const unsubscribe =   auth.onAuthStateChanged((authUser)=> {
         if(authUser) {
           setUser(authUser)
-          setUserid({user})
+         
         }
         else {
           setUser(null)
@@ -96,14 +129,23 @@ const signup = (event) => {
       
       
     }
-    
+
+
  
 
     return (
+
+        
+    
+
         <div className="header">
+       
+       <div onClick={()=> setOpenSignIn(true)} className="hamburger">
+      <MenuIcon />
+      </div>
 
              <div className="header__components">
-                <a><svg width="48px" height="48px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd"><path class="rui-77aaa" d="M661.333 256v512h-128v-512h128zM277.333 298.667c117.824 0 213.333 95.531 213.333 213.333s-95.509 213.333-213.333 213.333c-117.824 0-213.333-95.531-213.333-213.333s95.509-213.333 213.333-213.333zM794.496 384l37.504 37.504 37.504-37.504h90.496v90.496l-37.504 37.504 37.504 37.504v90.496h-90.496l-37.504-37.504-37.504 37.504h-90.496v-90.496l37.504-37.504-37.504-37.504v-90.496h90.496zM277.333 426.667c-47.061 0-85.333 38.293-85.333 85.333s38.272 85.333 85.333 85.333c47.061 0 85.333-38.293 85.333-85.333s-38.272-85.333-85.333-85.333z"></path></svg></a>
+                <Link to ="/"><svg width="48px" height="48px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd"><path class="rui-77aaa" d="M661.333 256v512h-128v-512h128zM277.333 298.667c117.824 0 213.333 95.531 213.333 213.333s-95.509 213.333-213.333 213.333c-117.824 0-213.333-95.531-213.333-213.333s95.509-213.333 213.333-213.333zM794.496 384l37.504 37.504 37.504-37.504h90.496v90.496l-37.504 37.504 37.504 37.504v90.496h-90.496l-37.504-37.504-37.504 37.504h-90.496v-90.496l37.504-37.504-37.504-37.504v-90.496h90.496zM277.333 426.667c-47.061 0-85.333 38.293-85.333 85.333s38.272 85.333 85.333 85.333c47.061 0 85.333-38.293 85.333-85.333s-38.272-85.333-85.333-85.333z"></path></svg></Link>
                
                  <div className="first__input">
                   <SearchIcon   className="first__input__search"/>
@@ -129,23 +171,30 @@ const signup = (event) => {
                     </div>
 
                     <div className="icons">
-                    {user? ( <> <ChatBubbleOutlineIcon />
-                   <NotificationsNoneIcon/> </>) : (<> </>)}
+                    {user? ( <div> <ChatBubbleOutlineIcon />
+                   <NotificationsNoneIcon/> </div>) : (<div> </div>)}
              
                     </div>
                          
                        
-
-
-
-                   {user ? (<p> Welcome {user.displayName} <Button onClick={()=>auth.signOut()}>   Logout </Button> </p>) 
+                
+                    <div className="login_name">
+                    {user ? (<p> Welcome {user.displayName} <Button onClick={()=>auth.signOut()}>   Logout </Button> </p>) 
               : (
                 <div className="app__loginContainer">
                 <Button onClick={()=> setOpenSignIn(true)}>Login</Button>
                 
                 </div>
+              
               )
               }
+
+                       
+               
+                    </div>
+
+
+                 
    
                
 
@@ -153,13 +202,13 @@ const signup = (event) => {
 
 
    
-                   <img className="sell" src="/1178080.png" alt="" />
+                   <img onClick = { ()=> setOpenSell(true)} className="sell" src="/1178080.png" alt="" />
      
              </div>
 
      
 
-      {user? (<> </>) : (        <Modal
+      {user? (<div> </div>) : (        <Modal
         open={open}
         onClose={()=> setOpen(false)}
       >
@@ -174,6 +223,9 @@ const signup = (event) => {
            
 
          </center>
+
+    
+
          <button className="header__signup__button" type="submit" onClick={signup}>Sign up</button>
 
          
@@ -195,15 +247,82 @@ const signup = (event) => {
         <form className="header__signin">
         <center>
         <img className="header__login__image" src="/assets/olx-logo.png" alt="" srcset="" />
-         <Input type="email"  placeholder="Enter your email" value={email} onChange={(event)=> setEmail(event.target.value)} />
-         <Input type="password"  placeholder="Enter your password" value={password} onChange={(event)=> setPassword(event.target.value)} />
+
+        
     
            
 
-         </center>
-         <button className="header__login__button" type="submit" onClick={signIn}>Sign In</button> <br />
-        <p>Not a user? </p> <Button onClick={()=> setOpen(true)}>Sign Up</Button>
+        
+         
+        
        
+         {user ? (<p>    <Button onClick={()=>auth.signOut()}>   Logout {user.displayName} </Button> </p>) 
+              : (
+                
+                <div className="header__mobile__login" >
+
+                  
+         <Input type="email"  placeholder="Enter your email" value={email} onChange={(event)=> setEmail(event.target.value)} />
+         <Input className="" type="password"  placeholder="Enter your password" value={password} onChange={(event)=> setPassword(event.target.value)} />
+         <button className="header__login__button" type="submit" onClick={signIn}>Login</button> <br />
+                  <p>Not a user? </p> <Button onClick={()=> setOpen(true)}>Sign Up</Button>
+                
+                </div>
+               
+              )
+              }
+
+      
+</center>
+        </form>
+       
+                 
+      </div>
+        
+      </Modal>
+
+
+      <div className="header__location">
+      <LocationOnIcon />
+      </div>
+
+      <Modal
+        open={openSell}
+        onClose={()=> setOpenSell(false)}
+      >
+     <div style={modalStyle} className={classes.paper}>
+        <form className="header__sell">
+        <center>
+        <img className="header__sell__image" src="/assets/olx-logo.png" alt="" srcset="" />
+ 
+        
+       
+         {user ? ( <div className="header__sell__content" >
+
+                  <p>Product Name</p>
+<Input type="text"  placeholder="eg: Galaxy S21 Ultra"  value={productName} onChange={(event)=> {setProductName(event.target.value)}} />
+
+<p>Category</p>
+<Input type="text"  placeholder="eg: Mobiles and Gadgets" value={productCategory} onChange= {(event) => {setProductCategory(event.target.value)}}   />
+
+<p>Price</p>
+<Input type="number"  placeholder="eg: 12,000,0"  value={productPrice} onChange={(event) =>  {setProductPrice(event.target.value)} }  />
+<img width="100px" height="100px" src={image? URL.createObjectURL(image) : ""} alt="" />
+
+<p>Product image</p>
+<Input type="file" onChange={(event)=> {setimage(event.target.files[0])}} placeholder="eg: Galaxy S21 Ultra"   />
+
+ <Button  onClick={addItem}>Add Item</Button>
+       
+       </div>) 
+              : ( <div><p>Sign in to post ad</p>
+                
+                </div>
+              )
+              }
+
+      
+</center>
         </form>
        
                  
@@ -211,8 +330,10 @@ const signup = (event) => {
         
       </Modal>
       
+      
+      </div>
 
-        </div>
+        
     )
 }
 

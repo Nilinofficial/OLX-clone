@@ -1,0 +1,11 @@
+
+
+.cars {
+position: relative;
+margin-top: 60px;
+width: 100%;
+min-height: 300px;
+background-color: gray;
+display: flex;
+
+}
