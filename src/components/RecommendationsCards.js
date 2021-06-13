@@ -3,7 +3,7 @@
 import './RecommendationsCards.css'
 
 import React,{useEffect,useState} from 'react'
-import {auth,storage,db,firebase} from '../firebase/firebase'
+import {db} from '../firebase/firebase'
 
 
 
@@ -13,7 +13,7 @@ function Cards() {
     const [products,setProducts] = useState([])
 
     useEffect(() => {
-        firebase.firestore().collection('products').get().then((snapshot)=> {
+        db.collection('products').get().then((snapshot)=> {
             const allPost = snapshot.docs.map((product) => {
                 return {
                     ...product.data(),
@@ -39,7 +39,7 @@ function Cards() {
                  <h4> ₹ {product.Price}</h4>
                   <p className="recommendations__cards__p">{product.Name}</p>
                  
-                  <p className="date">Date : {product.CreatedAt}</p>
+                  <p className="date">{product.CreatedAt}</p>
                   
         </div>})}
 

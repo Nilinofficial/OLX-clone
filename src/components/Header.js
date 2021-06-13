@@ -8,11 +8,14 @@ import React from 'react'
 import SearchIcon from '@material-ui/icons/Search';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import CloseIcon from '@material-ui/icons/Close';
 import MenuIcon from '@material-ui/icons/Menu';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import { v4 as uuidv4 } from 'uuid';
+import {Avatar} from '@material-ui/core'
+import CameraAltIcon from '@material-ui/icons/CameraAlt';
 
-import { BrowserRouter as Router, Route, Link,Switch } from "react-router-dom";
+import {  Link } from "react-router-dom";
 function getModalStyle() {
     const top = 50;
     const left = 50;
@@ -52,16 +55,22 @@ function Header({setUserid}) {
     const [productCategory,setProductCategory] = useState("");
     const [productPrice,setProductPrice]= useState();
     const [image,setimage] = useState(null);
-    const[uploadingStatus,setUploadingStatus] = useState("")
+    const [hamburgerOpen,setHamburgeropen] = useState(false)
+   
+
+    
+ 
 
     const date= new Date()
 
     const addItem = (e) => { 
       alert("Uploading...We will notify you when the upload completes.")
-     firebase.storage().ref(`/images/${image.name}`).put(image).then(({ref})=> {ref.getDownloadURL().then((url)=> {
-       console.log(url)
+       storage.ref(`/images/${uuidv4()}-{image.name}`).put(image).then(({ref})=> {ref.getDownloadURL().then((url)=> {
       
-       firebase.firestore().collection('products').add({
+         
+      
+      
+       db.collection('products').add({
         Name : productName,
         category : productCategory,
         Price: productPrice,
@@ -69,7 +78,7 @@ function Header({setUserid}) {
         userId: user.uid,
         CreatedAt: date.toDateString(),
         timestamp:firebase.firestore.FieldValue.serverTimestamp()
-       }).then(setOpenSell(false)).then(alert("Item added"))
+       }).then(setOpenSell(false)).then(alert("Item Uploaded and added...Please refresh"))
       })
      })
     
@@ -139,19 +148,56 @@ const signup = (event) => {
     
 
         <div className="header">
+          
        
-       <div onClick={()=> setOpenSignIn(true)} className="hamburger">
-      <MenuIcon />
+       <div  onClick={()=> setHamburgeropen(!hamburgerOpen)} className="hamburger">
+
+             {hamburgerOpen && (<div className="header__burger__list"> 
+             <div className="burger__list__top">
+               <CloseIcon/>
+             <svg className="olx__logo" width="48px" height="48px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd"><path class="rui-77aaa" d="M661.333 256v512h-128v-512h128zM277.333 298.667c117.824 0 213.333 95.531 213.333 213.333s-95.509 213.333-213.333 213.333c-117.824 0-213.333-95.531-213.333-213.333s95.509-213.333 213.333-213.333zM794.496 384l37.504 37.504 37.504-37.504h90.496v90.496l-37.504 37.504 37.504 37.504v90.496h-90.496l-37.504-37.504-37.504 37.504h-90.496v-90.496l37.504-37.504-37.504-37.504v-90.496h90.496zM277.333 426.667c-47.061 0-85.333 38.293-85.333 85.333s38.272 85.333 85.333 85.333c47.061 0 85.333-38.293 85.333-85.333s-38.272-85.333-85.333-85.333z"></path></svg>
+         
+            </div>
+            <div className="burger__list__login"><Avatar/> 
+            
+           
+              {user  ? (<p className="burger__list__login__log">Logout {user.displayName} {}</p>) : (<div className="burger__list__login__log">
+              <p className="burger__list__login__log__p1">Enter to your account</p>
+              <p className="burger__list__login__log__p2" onClick={()=> setOpenSignIn(true)}>Log in to your account</p>
+             
+              </div>)}
+              
+             </div>
+
+           
+             <div className="burger__list__bottom">
+              <div className="burger__list__bottom1">
+                <CameraAltIcon/>
+                <p onClick = {()=> setOpenSell(true)} >Start Selling</p>
+                </div>
+                <div className="burger__list__bottom2">
+                  <ChatBubbleOutlineIcon/>
+                  <p>Chat</p>
+                  </div>
+              
+              </div>
+             
+             
+              </div>) }
+
+
+      <MenuIcon style={{ fontSize: 40 }}/>
       </div>
 
              <div className="header__components">
-                <Link to ="/"><svg width="48px" height="48px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd"><path class="rui-77aaa" d="M661.333 256v512h-128v-512h128zM277.333 298.667c117.824 0 213.333 95.531 213.333 213.333s-95.509 213.333-213.333 213.333c-117.824 0-213.333-95.531-213.333-213.333s95.509-213.333 213.333-213.333zM794.496 384l37.504 37.504 37.504-37.504h90.496v90.496l-37.504 37.504 37.504 37.504v90.496h-90.496l-37.504-37.504-37.504 37.504h-90.496v-90.496l37.504-37.504-37.504-37.504v-90.496h90.496zM277.333 426.667c-47.061 0-85.333 38.293-85.333 85.333s38.272 85.333 85.333 85.333c47.061 0 85.333-38.293 85.333-85.333s-38.272-85.333-85.333-85.333z"></path></svg></Link>
+                <Link to ="/"><svg className="olx__logo" width="48px" height="48px" viewBox="0 0 1024 1024" data-aut-id="icon" class="" fill-rule="evenodd"><path class="rui-77aaa" d="M661.333 256v512h-128v-512h128zM277.333 298.667c117.824 0 213.333 95.531 213.333 213.333s-95.509 213.333-213.333 213.333c-117.824 0-213.333-95.531-213.333-213.333s95.509-213.333 213.333-213.333zM794.496 384l37.504 37.504 37.504-37.504h90.496v90.496l-37.504 37.504 37.504 37.504v90.496h-90.496l-37.504-37.504-37.504 37.504h-90.496v-90.496l37.504-37.504-37.504-37.504v-90.496h90.496zM277.333 426.667c-47.061 0-85.333 38.293-85.333 85.333s38.272 85.333 85.333 85.333c47.061 0 85.333-38.293 85.333-85.333s-38.272-85.333-85.333-85.333z"></path></svg></Link>
                
                  <div className="first__input">
                   <SearchIcon   className="first__input__search"/>
                  <input className="location" type="text" placeholder="Find my location"  />
                  
                  
+                  
                  <KeyboardArrowDownIcon/>
                  </div>     
                    
@@ -172,7 +218,7 @@ const signup = (event) => {
 
                     <div className="icons">
                     {user? ( <div> <ChatBubbleOutlineIcon />
-                   <NotificationsNoneIcon/> </div>) : (<div> </div>)}
+                    </div>) : (<div> </div>)}
              
                     </div>
                          
@@ -283,7 +329,7 @@ const signup = (event) => {
 
 
       <div className="header__location">
-      <LocationOnIcon />
+      <LocationOnIcon style={{ fontSize: 40 }} />
       </div>
 
       <Modal
@@ -300,10 +346,10 @@ const signup = (event) => {
          {user ? ( <div className="header__sell__content" >
 
                   <p>Product Name</p>
-<Input type="text"  placeholder="eg: Galaxy S21 Ultra"  value={productName} onChange={(event)=> {setProductName(event.target.value)}} />
+<Input inputProps={{ maxLength: 22 }} type="text"  placeholder="eg: Galaxy S21 Ultra" maxLength="11"  value={productName} onChange={(event)=> {setProductName(event.target.value)}} />
 
 <p>Category</p>
-<Input type="text"  placeholder="eg: Mobiles and Gadgets" value={productCategory} onChange= {(event) => {setProductCategory(event.target.value)}}   />
+<Input inputProps={{ maxLength: 22 }} type="text"  placeholder="eg: Mobiles and Gadgets" value={productCategory} onChange= {(event) => {setProductCategory(event.target.value)}}   />
 
 <p>Price</p>
 <Input type="number"  placeholder="eg: 12,000,0"  value={productPrice} onChange={(event) =>  {setProductPrice(event.target.value)} }  />
@@ -313,6 +359,8 @@ const signup = (event) => {
 <Input type="file" onChange={(event)=> {setimage(event.target.files[0])}} placeholder="eg: Galaxy S21 Ultra"   />
 
  <Button  onClick={addItem}>Add Item</Button>
+
+ 
        
        </div>) 
               : ( <div><p>Sign in to post ad</p>

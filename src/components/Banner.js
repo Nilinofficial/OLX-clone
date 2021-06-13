@@ -3,10 +3,8 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import React,{useState} from 'react'
 import {Link } from "react-router-dom";
 import Modal  from '@material-ui/core/Modal';
-import MenuIcon from '@material-ui/icons/Menu';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import { makeStyles } from '@material-ui/core/styles';
-import Footer from './Footer'
+
+
 
 
 
@@ -22,16 +20,7 @@ function getModalStyle() {
   }
 
 
-  const useStyles = makeStyles((theme) => ({
-    paper: {
-      position: 'absolute',
-      width: 400,
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-  }));
+
 
 
 
@@ -39,7 +28,7 @@ function getModalStyle() {
 function Banner() {
 
 
-    const classes = useStyles();
+    
     const [modalStyle] = React.useState(getModalStyle);
     const [open,setOpen] = useState(false)
     

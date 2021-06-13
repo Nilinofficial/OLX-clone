@@ -4,9 +4,10 @@
 
 .header {
     width: 100%;
-    height: 7vh;
+    height: 9vh;
     background-color: whitesmoke;
-    position: fixed;
+    position: sticky;
+    top:0;
     z-index: 10;
     display: flex;
     align-items: center;
@@ -145,9 +146,10 @@ width: 8%;
 }
 
 .icons{
-    width: 65px;
+    width: 100px;
+    padding: 20px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     display: flex;
 }
 
@@ -222,10 +224,7 @@ width: 220px;
   justify-content: space-between;
 }
 
-.header__sell input{
-   margin-top: 2.5px;
-   width: 60%;
-  }
+
 
   .header__sell p{
     margin-top: 2.5px;
@@ -266,8 +265,14 @@ justify-content: space-between;
     border-radius: 10px;
 }
 
-
-
+.login_name{
+    display: flex;
+    width: 120px;
+}
+   
+.login_name p{
+   font-size: 12px;
+}
    
 
 
@@ -275,22 +280,42 @@ justify-content: space-between;
 
 
 
-      @media only screen and (max-width: 1200px) {
+
+      @media only screen and (max-width: 1280px) {
         
           
-
+        .header__burger__list{
+            width:100%;
+            height:100vh;
+            top:0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+        
+            
+        }
+        .burger__list__top {
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            background-color: whitesmoke;
+        }
         .header {
             width: 100%;
             height: 7vh;
             background-color: whitesmoke;
-            position: fixed;
+           position: fixed;
             z-index: 10;
             border-bottom: 1px solid lightgray;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: absolute;
-            
+          
         }
 
         .header__components {
@@ -302,7 +327,69 @@ justify-content: space-between;
             
             }
 
+            .burger__list__login{
+                display: flex;
+                width: 100%;
+                height: 80px;
+                border-bottom: 1px solid black;
+                align-items: center;
+                padding: 20px;
+                
+               
+            }
 
+            .burger__list__login__log{
+                padding-left: 10px;
+            }
+
+              .burger__list__login__log__p1{
+    color:lightgray;
+}
+
+
+.burger__list__login__log__p2{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+.burger__list__login__log__p2:hover{
+    text-decoration: none;
+    cursor: pointer;
+    
+}
+
+
+.burger__list__bottom{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80px;
+    border-bottom: 1px solid black;
+   justify-content: center;
+    padding: 20px;
+}
+.burger__list__bottom p{
+   padding-left: 10px;
+}
+
+.burger__list__bottom p:hover{
+
+    text-decoration: underline;
+ }
+ 
+
+.burger__list__bottom1{
+    display: flex;
+    padding: 5px;
+   cursor: pointer;
+}
+
+.burger__list__bottom2{
+    display: flex;
+    padding: 5px;
+    cursor: pointer;
+}
 
        .language{
            display: none;
@@ -313,6 +400,7 @@ justify-content: space-between;
       .sell{
           bottom:0;
           position: fixed;
+          padding-bottom: 5px;
 
       }        
 
@@ -320,8 +408,8 @@ justify-content: space-between;
 
       .hamburger {
         display: flex;
-        padding: 20px;
-        justify-content: start;
+        padding: 10px;
+        
     }
 
     .app__loginContainer{
@@ -331,12 +419,13 @@ justify-content: space-between;
 
 .header__location{
     display: flex;
-    padding: 5px;
+    padding-right: 18px;
 }
 
 .second {
+    
     display: flex;
-    width: 70%;
+    width: 76%;
     align-items: center;
     background-color: white;
     display: flex;
@@ -352,7 +441,7 @@ justify-content: space-between;
 
 .second:hover {
     display: flex;
-    width: 70%;
+    width: 76%;
     align-items: center;
     background-color: white;
     display: flex;
@@ -405,5 +494,8 @@ justify-content: space-between;
 .icons{
     display: none;
 }
+
+
+
 
               }
