@@ -7,3 +7,9 @@ Branch 1 Main -Changelogs:
 *Sell button working now
 *Mobile Responsive.
 *Minor fixes
+
+
+Branch 2 -1.0.1 -Changelogs:
+
+*Hamburger Menu working now
+*Minor fixes
