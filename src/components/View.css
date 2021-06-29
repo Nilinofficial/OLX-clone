@@ -1,0 +1,163 @@
+.view{
+   top: 0;
+    width: 100%;  
+    display: flex;
+}
+
+.view__left{
+    display: flex;
+    flex-direction: column;
+    
+    width:70%;
+   
+}
+.view__right{
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    width: 30%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}
+
+.view__image__ProductImage{
+    width:900px;
+    height: 500px;
+    padding-left: 60px;
+    margin-top: 30px;
+    
+   
+}
+.view__productName{
+    width: 50%;
+    height: 50px;
+    margin-left: 100px;
+    margin-top: 40px;
+
+}
+
+.view__productDescription{
+   
+    margin-top: 30px;
+    margin-left: 100px;
+    width:85%;
+    
+   height: auto;
+   margin-bottom: 30px;
+}
+
+.right__container1{
+    width: 400px;
+    height: 150px;
+    border: 2px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.right__container2{
+    width: 400px;
+    height: 150px;
+    border: 2px solid lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+
+.right__container3{
+    width: 400px;
+    height: 150px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+   
+}
+
+@media only screen and (max-width: 1400px){
+    .right__container1{ 
+    width: 300px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+   
+    }
+    .right__container2{ 
+        width: 300px;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+       
+        }
+
+       
+
+}
+
+
+@media only screen and (max-width:1250px){
+    .view__image__ProductImage{
+        width:auto;
+        height: 500px;
+        padding-left: 60px;
+        margin-top: 30px;
+        
+       
+    }
+}
+
+
+
+@media only screen and (max-width:800px){
+    .view{
+        top: 0;
+         width: 100%;  
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+
+     }
+     .view__image__ProductImage{
+        width:auto;
+        min-width: 400px;
+        height: 400px;
+        margin-top: 70px;
+        
+       
+    }
+
+    .view__productName{
+        width: 100%;
+        height: 50px;
+        align-items: center;
+        
+    }
+    .view__left{
+        display: flex;
+        flex-direction: column;
+        
+        width:100%;
+       
+    }
+
+
+    .view__right{
+       display: flex;
+       flex-direction: column;
+    }
+
+
+    .view__productDescription{
+   display: none;
+    }
+}

@@ -1,7 +1,7 @@
 
 .suggestions__card {
   width: 300px;
-    height: 220px;
+   height: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -9,6 +9,7 @@
     padding: 15px;
     margin: 10px;
     background-color: white;
+    cursor: pointer;
 }
 
 .suggestions__cards
@@ -19,7 +20,7 @@
 
 .suggestions__cards__image{
     width: 200px;
-    height: 100px;
+    height: 150px;
 }
 .suggestions__cards__p{
     font-size: 15px;
@@ -30,7 +31,9 @@
     display: flex;
     margin-left: auto;
 }
-
+input{
+    height: 20px;
+}
 @media only screen and (max-width: 1100px) {
 
     

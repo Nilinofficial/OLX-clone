@@ -4,7 +4,7 @@
 
 .recommendations__card {
     width: 300px;
-      height: 220px;
+      height: 31vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -12,6 +12,7 @@
       padding: 15px;
       margin: 10px;
       background-color: white;
+      
   }
   
   .recommendations__cards
@@ -20,7 +21,7 @@
   }
   .recommendations__cards__image{
       width: 200px;
-      height: 100px;
+      height: 150px;
   }
   .recommendations__cards__p{
       font-size: 15px;
