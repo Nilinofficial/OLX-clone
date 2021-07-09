@@ -1,16 +1,13 @@
 
 Changelogs:
-1.Search Option added.
-2.Product Details section added.
-3.By default, sellerName is username.
-4.Small Fixes in Details/View section.
-5.User Details popping on default is now fixed.
+1.Location Added
+2.Minor ui fixes.
 
 
 Bugs: 
 1.Search Modal doesnot closes on clicking outside.
 2.Search box is not super responsive.
-3.Product details Page is not super responsive.
+3.Product details Page is not  responsive in Mobile View.
 
 Tell me if you find anything more.
 
