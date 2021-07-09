@@ -12,6 +12,15 @@
     cursor: pointer;
 }
 
+
+.suggestions__card:hover {
+    
+     
+    transform:scale(1.04);
+    opacity: 1;
+      
+  }
+
 .suggestions__cards
 {
     display: flex;

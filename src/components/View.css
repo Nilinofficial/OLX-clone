@@ -71,13 +71,30 @@
 .right__container3{
     width: 400px;
     height: 150px;
-
+  align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
    
 }
+
+.view__chat{
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+     background-color:  #002f34;
+     color: white;
+}
+
+
+.view__chat:hover{
+   cursor: pointer;
+}
+
+
+
 
 @media only screen and (max-width: 1400px){
     .right__container1{ 
@@ -98,9 +115,6 @@
         padding: 10px;
        
         }
-
-       
-
 }
 
 
@@ -110,9 +124,7 @@
         height: 500px;
         padding-left: 60px;
         margin-top: 30px;
-        
-       
-    }
+         }
 }
 
 
@@ -131,9 +143,7 @@
         width:auto;
         min-width: 400px;
         height: 400px;
-        margin-top: 70px;
-        
-       
+        margin-top: 70px;   
     }
 
     .view__productName{
@@ -144,10 +154,8 @@
     }
     .view__left{
         display: flex;
-        flex-direction: column;
-        
-        width:100%;
-       
+        flex-direction: column; 
+        width:100%;   
     }
 
 

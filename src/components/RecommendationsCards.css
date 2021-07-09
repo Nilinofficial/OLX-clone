@@ -3,21 +3,34 @@
 
 
 .recommendations__card {
-    width: 300px;
+    width: auto;
       height: 31vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      
       align-items: center;
       padding: 15px;
       margin: 10px;
       background-color: white;
       
   }
+
+
+
+  .recommendations__card:hover {
+    
+     
+    transform:scale(1.04);
+    opacity: 1;
+      
+  }
+
   
   .recommendations__cards
   {
       display: flex;
+      flex-wrap: wrap;
   }
   .recommendations__cards__image{
       width: 200px;

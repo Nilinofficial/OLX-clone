@@ -2,6 +2,7 @@ import "./SuggestionsCards.css";
 import { db } from "../firebase/firebase";
 import React, { useEffect, useState } from "react";
 import { useHistory} from "react-router-dom";
+
 function SuggestionsCards() {
 
 
@@ -44,6 +45,9 @@ function SuggestionsCards() {
           </div>
         );
       })}
+
+
+
     </div>
     
 

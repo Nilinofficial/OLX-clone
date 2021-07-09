@@ -3,16 +3,18 @@
 import './View.css'
 import {db} from '../firebase/firebase'
 import React,{useState,useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {Route, useParams,useHistory} from 'react-router-dom'
 
-function View() {
+function View({currentUser}) {
 
  const {productId} = useParams();
  const [data,setData] = useState({});
  const[userDetails,setUserDetails] = useState("")
 
-
  
+ console.log(currentUser)
+
+   //fetching product Details
 
  useEffect(()=> {
     
@@ -21,7 +23,7 @@ function View() {
      })
  },[data,productId])
 
-
+  //fetching seller details
  useEffect(() => {
     
    db.collection('users').where('id','==', `${data.userid}`).get().then((res) => {
@@ -31,9 +33,16 @@ function View() {
     })
  },[data,productId])
 
+ const chat = () => {
+    history.push("/chat")
+}
+
+ const history = useHistory();
+
     return (
+        
         <div className="view">
-           
+               <Route>
               <div className="view__left">
               <img className="view__image__ProductImage" src ={data.url} alt=""/>
              
@@ -68,14 +77,14 @@ function View() {
                        <p></p>       
                      </div>
                       
-
-                     <div className="right__container3">
-                     
-                     </div>
+                    {currentUser&& <div className="right__container3">
+                        <button className="view__chat" onClick={chat} >Chat with seller </button>
+                     </div>}
+                    
              </div>
          
                    
-       
+             </Route>
         </div>
     )
 }

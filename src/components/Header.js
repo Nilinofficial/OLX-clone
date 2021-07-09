@@ -2,8 +2,8 @@ import './Header.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { auth, storage, db, firebase } from '../firebase/firebase'
-import { useState, useEffect,useRef } from 'react'
-import { Button, Input } from '@material-ui/core'
+import { useState, useEffect} from 'react'
+import { Button, Input,Avatar } from '@material-ui/core'
 import React from 'react'
 import SearchIcon from '@material-ui/icons/Search';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -20,8 +20,7 @@ import CreditCardIcon from '@material-ui/icons/CreditCard';
 import HelpIcon from '@material-ui/icons/Help';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import Fuse from "fuse.js"
-
+import AlgoliaPlaces from 'algolia-places-react';
 
 
 //Modal - Material ui styles
@@ -52,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 //states
 
-function Header() {
+function Header({setCurrentUser}) {
   const [username, setUsername] = useState("")
   const [email,setEmail] = useState("")
   const [password,setPassword] = useState("")
@@ -73,6 +72,20 @@ function Header() {
   const [search, setSearch] = useState("");
   const [searchlist, setSearchlist] = useState(false);
   const [products, setProducts] = useState([]);
+  const[seed,setSeed]= useState("");
+ 
+
+
+
+  
+
+
+useEffect(()=> {
+  setSeed(Math.floor(Math.random()*5000))
+},[user])
+
+
+
   useEffect(() => {
     db.collection("products")
       .get()
@@ -148,6 +161,7 @@ function Header() {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         setUser(authUser)
+         setCurrentUser({authUser})
          
       }
       else {
@@ -176,6 +190,11 @@ function Header() {
     event.preventDefault()
     auth.signInWithEmailAndPassword(email, password).catch((err) => alert(err.message)).then(setOpenSignIn(false))
   }
+
+  function rotateImage() {
+    setUserDetails(!userDetails)
+
+}
 
 
   
@@ -227,10 +246,43 @@ function Header() {
 
 
              {/* Location */}
-          <div className="first__input">
-          <SearchIcon className="second__input__search__icon" style={{ fontSize: 40 }}  /> 
-            <div>  <input className="location" type="text" placeholder="Find my location"   /> </div>
-          </div>
+         
+            
+             <AlgoliaPlaces
+             className="places"
+      placeholder='Search Location'
+
+      options={{
+        APPID: 'plANAH0L33US',
+        apiKey: '578b35d049cc63b61f58e110b2408f0e',
+        language: 'sv',
+        countries: ['in'],
+        type: 'city',
+        // Other options from https://community.algolia.com/places/documentation.html#options
+      }}
+
+
+      onChange={({ query, rawAnswer, suggestion, suggestionIndex }) => 
+        console.log('Fired when suggestion selected in the dropdown or hint was validated.')}
+
+      onSuggestions={({ rawAnswer, query, suggestions }) => 
+        console.log('Fired when dropdown receives suggestions. You will receive the array of suggestions that are displayed.')}
+
+      onCursorChanged={({ rawAnswer, query, suggestion, suggestonIndex }) => 
+        console.log('Fired when arrows keys are used to navigate suggestions.')}
+
+      onClear={() => 
+        console.log('Fired when the input is cleared.')}
+
+      onLimit={({ message }) => 
+        console.log('Fired when you reached your current rate limit.')}
+
+      onError={({ message }) => 
+        console.log('Fired when we could not make the request to Algolia Places servers for any reason but reaching your rate limit.')}
+    />
+
+  
+          
 
           {/* Item search */}
 
@@ -244,7 +296,7 @@ function Header() {
 {filteredName.map((product) => {
         return (
           <div className="searchitems__list"
-            onClick={() => {history.push(`/view/${product.id}`); setSearchlist(!searchlist) }}
+            onClick={() => {history.push(`/view/${product.id}`); setSearchlist(!searchlist); setSearch("") }}
           >
             
            
@@ -258,11 +310,13 @@ function Header() {
           </div>
 
         
-        
-
+      
           <div className="language">
             <h4>ENGLISH</h4>
             <KeyboardArrowDownIcon />
+
+
+           
           </div>
 
           <div className="icons">
@@ -275,8 +329,8 @@ function Header() {
              
           <div className="login_name">
             {user ? (<div login_details >
-              <img className="login__avatar" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg/1200px-Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg" alt=""/>
-              <KeyboardArrowDownIcon onClick={() => { setUserDetails(!userDetails) }} />
+              <img className="login__avatar" src={`https://avatars.dicebear.com/api/human/${seed}.svg`} alt=""/>
+              <KeyboardArrowDownIcon className="myimage" onClick={rotateImage} />
 
              {/* User details drop down */}
               {userDetails && <div className="userDetails__modal">
@@ -476,7 +530,7 @@ function Header() {
         </Modal>
       </Route>
 
-      
+
     </div>
 
 
